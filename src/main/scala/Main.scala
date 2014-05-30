@@ -10,10 +10,11 @@ object Main {
 
     val model = new OnlineRecommender()
 
+    // Change this iteration count to change Total Diff
     for(i <- 1 to 1000000) {
       val obj = arr(Random.nextInt(train_pos))
       model.feed(obj(0), obj(1), 1.0, obj(2).toDouble)
-      if((i % 100000) == 0) {
+      if((i % 100000) == 0) { // to display intermediate status
         println(i)
       }
     }
@@ -24,7 +25,6 @@ object Main {
       val score = model.predict(obj(0), obj(1))
       val diff = Math.abs(score - obj(2).toDouble)
 
-      // println(score + " " + sum)
       sum += diff
     }
     println("Total Diff : " + sum)
