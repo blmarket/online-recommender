@@ -26,7 +26,7 @@ class Main works with MovieLens data to predict user-item preferences.
 
 ### Algorithm
 
-Stochastic matrix factorization
+matrix factorization with stochastic gradient descent
 
 ## TODO
 
