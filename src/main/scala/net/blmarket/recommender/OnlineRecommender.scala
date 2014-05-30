@@ -8,20 +8,20 @@ class OnlineRecommender {
   val lambda = 0.001 // regularization
   var alpha = -0.03 // learning rate
 
-  def costFunc(ufv: FeatureVector)(itemName: String, score: Double): (Double, FeatureVector, FeatureVector) = {
+  def costFunc(ufv: FeatureVector)(itemName: String, prob: Double, score: Double): (Double, FeatureVector, FeatureVector) = {
     val ifv = itemFeatures(itemName)
     val h = ufv * ifv - score
-    val diff = h*h + lambda * (ufv * ufv) + (ifv * ifv) * lambda
+    val J = h*h + lambda * (ufv * ufv) + (ifv * ifv) * lambda
 
-    val userDelta = (ifv * h + ufv * (2 * lambda)) * alpha
-    val itemDelta = (ufv * h + ifv * (2 * lambda)) * alpha * 0.001
+    val userDelta = (ifv * h + ufv * (2 * lambda)) * alpha * prob
+    val itemDelta = (ufv * h + ifv * (2 * lambda)) * alpha * prob * 0.001
 
-    (diff, userDelta, itemDelta)
+    (J, userDelta, itemDelta)
   }
 
-  def feed(userName: String, scores: Seq[(String, Double)]): Double = {
+  def feed(userName: String, scores: Seq[(String, Double, Double)]): Double = {
     val cf = costFunc(userFeatures(userName))_
-    val tmp = scores.map(x => cf(x._1, x._2))
+    val tmp = scores.map(x => cf(x._1, x._2, x._3))
     val userDelta = tmp.map(x => (x._1, x._2)).reduce((x,y) => (x._1 + y._1, x._2 + y._2))
 
     userFeatures.update(userName, userDelta._2)

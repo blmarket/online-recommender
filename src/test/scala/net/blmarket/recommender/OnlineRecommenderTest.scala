@@ -6,8 +6,8 @@ class OnlineRecommenderTest extends FlatSpec with Matchers {
   "OnlineRecommender" should "learn from data" in {
     val OR = new OnlineRecommender()
     for(i <- 1 to 10000) {
-      OR.feed("Erika", Seq(("News", 5), ("Blog", 3), ("Naver", 1)))
-      OR.feed("Jayce", Seq(("Blog", 5), ("Naver", 1), ("GOGO", 2)))
+      OR.feed("Erika", Seq(("News", 1.0, 5.0), ("Blog", 1.0, 3.0), ("Naver", 1.0, 1.0)))
+      OR.feed("Jayce", Seq(("Blog", 1.0, 5.0), ("Naver", 1.0, 1.0), ("GOGO", 1.0, 2.0)))
     }
 
     OR.calcScore("Erika", "News") should (be > 4.5 and be < 5.5)
