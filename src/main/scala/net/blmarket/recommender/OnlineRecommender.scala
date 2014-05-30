@@ -35,7 +35,7 @@ class OnlineRecommender {
   def feed(userName: String, itemName: String, prob: Double, score: Double): Double = {
     val cost = costFunc(userFeatures(userName), itemFeatures(itemName), prob, score)
     userFeatures.update(userName, cost._2)
-    itemFeatures.update(itemName, cost._2)
+    itemFeatures.update(itemName, cost._3)
 
     cost._1
   }
