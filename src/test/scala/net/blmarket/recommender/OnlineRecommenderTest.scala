@@ -10,12 +10,12 @@ class OnlineRecommenderTest extends FlatSpec with Matchers {
       OR.feed("Jayce", Seq(("Blog", 1.0, 5.0), ("Naver", 1.0, 1.0), ("GOGO", 1.0, 2.0)))
     }
 
-    OR.calcScore("Erika", "News") should (be > 4.5 and be < 5.5)
-    OR.calcScore("Erika", "Blog") should (be > 2.5 and be < 3.5)
-    OR.calcScore("Erika", "Naver") should (be > 0.5 and be < 1.5)
+    OR.predict("Erika", "News") should (be > 4.5 and be < 5.5)
+    OR.predict("Erika", "Blog") should (be > 2.5 and be < 3.5)
+    OR.predict("Erika", "Naver") should (be > 0.5 and be < 1.5)
 
-    OR.calcScore("Jayce", "Blog") should (be > 4.5 and be < 5.5)
-    OR.calcScore("Jayce", "Naver") should (be > 0.5 and be < 1.5)
-    OR.calcScore("Jayce", "GOGO") should (be > 1.5 and be < 2.5)
+    OR.predict("Jayce", "Blog") should (be > 4.5 and be < 5.5)
+    OR.predict("Jayce", "Naver") should (be > 0.5 and be < 1.5)
+    OR.predict("Jayce", "GOGO") should (be > 1.5 and be < 2.5)
   }
 }

@@ -56,7 +56,7 @@ class OnlineRecommender {
    * @param itemName name of item
    * @return predicted score.
    */
-  def calcScore(userName: String, itemName: String): Double = {
+  def predict(userName: String, itemName: String): Double = {
     userFeatures(userName) * itemFeatures(itemName)
   }
 }
