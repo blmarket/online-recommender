@@ -14,10 +14,10 @@ class FeatureVectorTest extends FlatSpec with Matchers {
     val vec2 = FeatureVector.createRandom()
     val v3 = vec + vec2
 
-    assert(v3.vec(0) > vec.vec(0))
-    assert(v3.vec(0) > vec2.vec(0))
+    assert(v3.vec(0) != vec.vec(0))
+    assert(v3.vec(0) != vec2.vec(0))
 
-    assert(v3.vec(49) > vec.vec(49))
-    assert(v3.vec(49) > vec2.vec(49))
+    assert(v3.vec(49) != vec.vec(49))
+    assert(v3.vec(49) != vec2.vec(49))
   }
 }
